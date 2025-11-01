@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Nikita! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Floating Hearts */
+        #heartsContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            animation: floatHeart 5s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Home Page */
+        .home-page {
+            text-align: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .balloons-container {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .balloon {
+            width: 50px;
+            height: 70px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            animation: floatBalloon 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .balloon:nth-child(1) { background: #ff6b6b; animation-delay: 0s; }
+        .balloon:nth-child(2) { background: #4ecdc4; animation-delay: 0.5s; }
+        .balloon:nth-child(3) { background: #ffe66d; animation-delay: 1s; }
+        .balloon:nth-child(4) { background: #a8e6cf; animation-delay: 1.5s; }
+        .balloon:nth-child(5) { background: #ff8b94; animation-delay: 2s; }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: rgba(255,255,255,0.8);
+        }
+
+        @keyframes floatBalloon {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+
+        .sparkles {
+            position: absolute;
+            font-size: 2em;
+            animation: sparkleFloat 3s ease-in-out infinite;
+        }
+
+        .sparkle1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .sparkle2 { top: 30%; right: 15%; animation-delay: 0.5s; }
+        .sparkle3 { bottom: 30%; left: 20%; animation-delay: 1s; }
+        .sparkle4 { bottom: 25%; right: 10%; animation-delay: 1.5s; }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .main-title {
+            font-size: 3.5em;
+            color: #fff;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+            margin-top: 80px;
+            animation: bounceIn 1.2s ease, glow 2s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 4px 4px 8px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.3);
+            }
+            50% {
+                text-shadow: 4px 4px 8px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.6), 0 0 60px rgba(255,215,0,0.4);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.15); }
+            70% { transform: scale(0.95); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease 0.5s both;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .date-special {
+            font-size: 1.3em;
+            color: #fff;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: fadeIn 1s ease 1s both;
+        }
+
+        .from-name {
+            font-size: 1.6em;
+            color: #fff;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            animation: fadeIn 1s ease 1.5s both;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 20px;
+            z-index: 10;
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 22px 50px;
+            font-size: 1.4em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .nav-button:active {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .nav-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .btn-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .btn-3 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        /* Content Pages */
+        .content-box {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 40px 30px;
+            margin: 20px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .content-box h2 {
+            text-align: center;
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .from-text {
+            text-align: center;
+            color: #f5576c;
+            font-size: 1.3em;
+            margin-bottom: 35px;
+            font-style: italic;
+        }
+
+        .wish-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .wish-card:nth-child(3) { animation-delay: 0.2s; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
+        .wish-card:nth-child(4) { animation-delay: 0.4s; background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
+        .wish-card:nth-child(5) { animation-delay: 0.6s; background: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%); }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wish-card h3 {
+            color: #333;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .wish-card p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .typewriter {
+            font-size: 1.3em;
+            color: #333;
+            line-height: 2;
+            margin: 30px 0;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .surprise-container {
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .surprise-text {
+            font-size: 3.5em;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: heartbeat 1.5s ease infinite;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+        }
+
+        .back-button {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 18px 45px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            font-family: 'Georgia', serif;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .back-button:active {
+            transform: scale(1.05);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .main-title { 
+                font-size: 2.2em;
+                margin-top: 100px;
+            }
+            .subtitle { font-size: 1.3em; }
+            .date-special { font-size: 1.1em; }
+            .from-name { font-size: 1.3em; }
+            .nav-button { 
+                padding: 20px 35px; 
+                font-size: 1.2em; 
+            }
+            .content-box {
+                padding: 30px 20px;
+            }
+            .content-box h2 { font-size: 1.9em; }
+            .wish-card { padding: 25px; }
+            .wish-card h3 { font-size: 1.4em; }
+            .surprise-text { font-size: 2.3em; }
+            .balloon { width: 40px; height: 60px; }
+            .balloon::after { height: 25px; bottom: -25px; }
+            .sparkles { font-size: 1.5em; }
+            .typewriter { font-size: 1.15em; }
+        }
+
+        @media (max-width: 480px) {
+            .main-title { font-size: 1.9em; }
+            .subtitle { font-size: 1.1em; }
+            .nav-button { font-size: 1.1em; padding: 18px 30px; }
+            .surprise-text { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+    <div id="heartsContainer"></div>
+
+    <!-- Home Page -->
+    <div class="page active" id="home">
+        <div class="home-page">
+            <div class="balloons-container">
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+                <div class="balloon"></div>
+            </div>
+
+            <div class="sparkles sparkle1">✨</div>
+            <div class="sparkles sparkle2">💫</div>
+            <div class="sparkles sparkle3">⭐</div>
+            <div class="sparkles sparkle4">✨</div>
+
+            <div class="main-title">🎉 Happy Birthday Nikita! 🎉</div>
+            <div class="subtitle">The Most Amazing Person! 🌟</div>
+            <div class="date-special">November 3rd, 2025 - Your Special Day!</div>
+            <div class="from-name">~ From Divyaaa 💕</div>
+
+            <div class="button-container">
+                <button class="nav-button btn-1" onclick="goToPage('wishes')">
+                    <span>🎂 Birthday Wishes</span>
+                </button>
+                <button class="nav-button btn-2" onclick="goToPage('message')">
+                    <span>💌 Special Message</span>
+                </button>
+                <button class="nav-button btn-3" onclick="goToPage('surprise')">
+                    <span>🎁 Final Surprise</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishes Page -->
+    <div class="page" id="wishes">
+        <div class="container">
+            <div class="content-box">
+                <h2>Birthday Wishes for You! 🎂</h2>
+                <p class="from-text">~ From Divyaaa 💕</p>
+                
+                <div class="wish-card">
+                    <h3>🌟 May Your Day Shine Bright</h3>
+                    <p>Wishing you a birthday filled with joy, laughter, and all the things that make you smile! You deserve every bit of happiness today and always. May this day bring you wonderful surprises and beautiful moments.</p>
+                </div>
+
+                <div class="wish-card">
+                    <h3>🎈 Another Amazing Year</h3>
+                    <p>Here's to another year of awesome adventures, unforgettable moments, and dreams coming true! May this year bring you everything you've been hoping for and more. Keep shining and being the incredible person you are.</p>
+                </div>
+
+                <div class="wish-card">
+                    <h3>✨ You're Simply Amazing</h3>
+                    <p>Thank you for being such an incredible person. Your kindness, your smile, and your positive energy make the world a better place. You have this special way of making everyone around you feel happy. Happy Birthday, Nikita!</p>
+                </div>
+
+                <div class="wish-card">
+                    <h3>🎊 Celebrate BIG!</h3>
+                    <p>Today is YOUR day! Eat all the cake, make all the wishes, and enjoy every single moment. You're special and you deserve to be celebrated in the biggest way possible. May your day be as wonderful as you are!</p>
+                </div>
+
+                <button class="back-button" onclick="goToPage('home')">← Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Page -->
+    <div class="page" id="message">
+        <div class="container">
+            <div class="content-box">
+                <h2>A Message From My Heart 💌</h2>
+                <p class="from-text">~ Divyaaa</p>
+                <div class="typewriter" id="typewriter"></div>
+                <button class="back-button" onclick="goToPage('home')">← Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Surprise Page -->
+    <div class="page" id="surprise">
+        <div class="surprise-container">
+            <div class="surprise-text" id="surpriseText">🎉</div>
+            <button class="back-button" onclick="goToPage('home')">← Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            var container = document.getElementById('heartsContainer');
+            if (!container) return;
+            
+            var heart = document.createElement('div');
+            heart.className = 'heart';
+            var hearts = ['❤️', '💕', '💖', '💗', '💝'];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
+            container.appendChild(heart);
+            
+            setTimeout(function() {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 6000);
+        }
+
+        // Start creating hearts
+        setInterval(createHeart, 500);
+
+        // Page navigation
+        function goToPage(pageId) {
+            var pages = document.querySelectorAll('.page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+            
+            var targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0);
+                
+                if (pageId === 'message') {
+                    setTimeout(startTypewriter, 300);
+                } else if (pageId === 'surprise') {
+                    setTimeout(startSurprise, 300);
+                }
+            }
+        }
+
+        // Typewriter effect
+        var fullMessage = "Hey Nikita! 🎉\n\nFirst of all, Happy Birthday! I hope your day is as wonderful as you are. Thank you for being such an amazing person and for all the great moments we share.\n\nI wanted to tell you something important...\n\nSorry Nikita, if you ever feel something weird about me. Sometimes I feel too much jealous and become too passive about you. I know it might seem strange or confusing.\n\nBut I don't have the intention to make you feel sad. I really don't. It's just that... I don't know... I feel too, too, too much jealous sometimes.\n\nThat's why sometimes I feel like I don't want to talk. It's not because of you - you're amazing. It's just me trying to deal with these feelings.\n\nI'm sorry if this ever made things awkward or uncomfortable. You deserve to have a great day and I wanted to be honest with you.\n\nI hope you understand. 💙\n\nHave the best birthday ever! 🎂✨";
+
+        function startTypewriter() {
+            var element = document.getElementById('typewriter');
+            if (!element) return;
+            
+            element.textContent = '';
+            var i = 0;
+            
+            function type() {
+                if (i < fullMessage.length) {
+                    element.textContent += fullMessage.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            
+            type();
+        }
+
+        // Surprise animation
+        var surpriseTexts = [
+            "🎉",
+            "Get Ready...",
+            "3",
+            "2", 
+            "1",
+            "For Something Special...",
+            "💝",
+            "From My Heart...",
+            "To You...",
+            "🌟",
+            "I Love You Nikita! 💕",
+            "Happy Birthday! 🎂🎉"
+        ];
+
+        function startSurprise() {
+            var element = document.getElementById('surpriseText');
+            if (!element) return;
+            
+            var index = 0;
+            
+            function changeText() {
+                if (index < surpriseTexts.length) {
+                    element.textContent = surpriseTexts[index];
+                    index++;
+                    var delay = (index === 11) ? 2500 : 1800;
+                    setTimeout(changeText, delay);
+                }
+            }
+            
+            element.textContent = surpriseTexts[0];
+            index = 1;
+            setTimeout(changeText, 1800);
+        }
+    </script>
+</body>
+</html>
